@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: follow
+  labels:
+    name: follow
+
+---
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  namespace: follow
+  name: frontend
+
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
